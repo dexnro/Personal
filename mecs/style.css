@@ -1,0 +1,148 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Full screen wrapper */
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Top section: background image (50% height) */
+.top-section img {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* Bottom section (50% height) */
+.bottom-section {
+  background-color: #bb9898;
+  width: 100%;
+  height: 42vh;
+  text-align: center;
+  padding-top: 10vh;
+}
+
+.bottom-section p {
+  font-size: 1rem;
+  color: #111;
+  letter-spacing: 0.5px;
+  padding: 0 1rem;
+}
+
+/* Profile circle in center */
+.profile-pic {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #00cc66;
+  border: 5px solid white;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .profile-pic {
+    width: 150px;
+    height: 150px;
+  }
+
+  .bottom-section {
+    padding-top: 12vh;
+  }
+
+  .bottom-section p {
+    font-size: 0.9rem;
+  }
+}
+
+.envelope-container {
+  text-align: center;
+  background-color: #a08f8f;
+}
+
+.envelope-wrapper {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.envelope-icon {
+  font-size: 2.5rem;
+  position: relative;
+}
+
+.heart {
+  font-size: 1.2rem;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hidden-message {
+  display: none;
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff3f8;
+  color: #333;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  white-space: pre-wrap;
+  z-index: 10;
+  width: 90vw; /* Responsive width: 90% of viewport */
+  max-width: 400px; /* But no more than 400px */
+  animation: fadeIn 1.2s ease, borderFadeIn 1.5s ease-in;
+  line-height: 1.6;
+  text-align: left;
+  border: 2px dashed #f7b2c0;
+  box-sizing: border-box;
+}
+
+.hidden-message::before {
+  content: "💌 A soft note just for you";
+  display: block;
+  font-size: 0.9rem;
+  color: #d36c7a;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

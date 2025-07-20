@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery</title>
+  <link rel="stylesheet" href="gallery.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <div class="gallery-wrapper">
+    <h1>📸 Peek Into My World</h1>
+
+    <!-- Upload Button -->
+    <div class="upload-section">
+      <input type="file" id="photoUpload" accept="image/*" hidden />
+      <button onclick="document.getElementById('photoUpload').click()">➕ Add Photo</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Hardcoded photo -->
+      <div class="gallery-item">
+        <img src="img/sidedp.jpg" alt="Permanent Photo">
+        <p class="upload-date">📅 7/202025</p>
+      </div>
+      <div class="gallery-item">
+        <img src="img/profile.jpg" alt="Permanent Photo">
+        <p class="upload-date">📅 7/20/2025</p>
+      </div>
+    </div>
+
+    <!-- Back button -->
+    <a href="index.html" class="back-btn">← Back to Profile</a>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('photoUpload');
+    const galleryGrid = document.getElementById('galleryGrid');
+
+    // Load saved images from localStorage
+    window.onload = function () {
+      const storedImages = JSON.parse(localStorage.getItem('galleryImages')) || [];
+
+      storedImages.forEach(item => {
+        const container = document.createElement('div');
+        container.classList.add('gallery-item');
+
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = "Uploaded Photo";
+
+        const date = document.createElement('p');
+        date.className = "upload-date";
+        date.textContent = `📅 ${item.date}`;
+
+        container.appendChild(img);
+        container.appendChild(date);
+        galleryGrid.appendChild(container);
+      });
+    };
+
+    // When a new image is uploaded
+    fileInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const base64Image = e.target.result;
+          const currentDate = new Date().toLocaleDateString();
+
+          const container = document.createElement('div');
+          container.classList.add('gallery-item');
+
+          const img = document.createElement('img');
+          img.src = base64Image;
+          img.alt = "New Photo";
+
+          const date = document.createElement('p');
+          date.className = "upload-date";
+          date.textContent = `📅 ${currentDate}`;
+
+          container.appendChild(img);
+          container.appendChild(date);
+          galleryGrid.appendChild(container);
+
+          // Save image and date to localStorage
+          const storedImages = JSON.parse(localStorage.getItem('galleryImages')) || [];
+          storedImages.push({ src: base64Image, date: currentDate });
+          localStorage.setItem('galleryImages', JSON.stringify(storedImages));
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+</body>
+</html>

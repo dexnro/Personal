@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MECS</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Font: Playfair Display -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+  <style>
+    p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 0 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- Top Background Image Section -->
+    <div class="top-section">
+      <img src="img/tulips-bg.jpg" alt="Flowers Background">
+    </div>
+
+    <!-- Profile Circle in Center -->
+    <div class="profile-pic">
+      <img src="img/profile.jpg" alt="Profile Picture">
+    </div>
+
+    <!-- Bottom Message Section -->
+    <div class="bottom-section">
+      <br><br><br>
+      <p>"If this site feels soft, warm, and full of light, it’s because you are.</p>
+      <a href="gallery.html">About Her</a>
+    </div>
+
+    <!-- Envelope Message Section -->
+    <!-- Envelope with Heart -->
+<!-- Envelope Message Section -->
+<div class="envelope-container">
+  <div class="envelope-wrapper" onclick="toggleMessage()">
+    <div class="envelope-icon">
+      ✉️<span class="heart">❤️</span>
+    </div>
+    <div id="hidden-message" class="hidden-message animate-message">
+      <p id="animated-text">
+        <!-- Text will appear here -->
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const messageText = `Feelings don’t disappear just because they’re not returned. 
+But they do learn how to sit quietly. This is me, sitting with 
+them gently, respectfully, and still choosing to care for you 
+from a distance.`;
+
+  let typed = false;
+
+  function toggleMessage() {
+    const msgBox = document.getElementById("hidden-message");
+    const textBox = document.getElementById("animated-text");
+
+    if (msgBox.style.display === "block") {
+      msgBox.style.display = "none";
+      textBox.innerHTML = "";
+      typed = false;
+    } else {
+      msgBox.style.display = "block";
+      if (!typed) {
+        typeText(messageText, textBox);
+        typed = true;
+      }
+    }
+  }
+
+  function typeText(text, element, i = 0) {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      setTimeout(() => typeText(text, element, i + 1), 60); // slower typing
+    }
+  }
+</script>
+
+</body>
+</html>
